@@ -88,7 +88,7 @@ ERGS aims to offer a unifying graph platform to support a variety of use cases w
  ### Creating ERGS Repository 
   1. Click on “New repository” in the sidebar menu. This brings up the “New Repository” page. You are presented with a simple form that provides a “Type:” selector with several repository types. Select "Expressive Reasoning Graph Store".
   2. The “ID:” and “Title:” fields are optional in this form. Clicking “Next” brings up a form with more fields specific to the ERGS.
-  3. Fill  “ID:” and “Title:”, choose configuration([Sample](https://github.ibm.com/ReasoningInfra/expressive-reasoning-graph-store/blob/master/RDF4J/rdf4j-repository/src/main/resources/test.properties)) and Tbox([Sample](https://github.ibm.com/ReasoningInfra/expressive-reasoning-graph-store/blob/master/RDF4J/rdf4j-repository/src/test/resources/lubm/univ-bench.owl)) file before the “Create” button may be clicked. The configuration file contains following configuration parameters:
+  3. Fill  “ID:” and “Title:”, choose configuration([Sample](https://github.com/IBM/expressive-reasoning-graph-store/blob/master/RDF4J/rdf4j-repository/src/main/resources/test.properties)) and Tbox([Sample](https://github.com/IBM/expressive-reasoning-graph-store/blob/master/RDF4J/rdf4j-repository/src/test/resources/lubm/univ-bench.owl)) file before the “Create” button may be clicked. The configuration file contains following configuration parameters:
       1. input.enableforwardchaining (true/false): enable forward chaining (optional, default is false)
       2. input.commitfrequency: RDF triples commite size (required, default value is 10000 triples)
       3. input.numthreads: degree of parallalism (required, default value is 1 thread)
@@ -101,7 +101,7 @@ ERGS aims to offer a unifying graph platform to support a variety of use cases w
    ![new repo](Images/rdf4j-repository-creation.png)
 
  ### Ingesting data into ERGS Repository 
-  [Sample](https://github.ibm.com/ReasoningInfra/expressive-reasoning-graph-store/blob/master/RDF4J/rdf4j-repository/src/test/resources/lubm/University0_0.owl)
+  [Sample](https://github.com/IBM/expressive-reasoning-graph-store/blob/master/RDF4J/rdf4j-repository/src/test/resources/lubm/University0_0.owl)
   1. Using RDF4J Workbench/GUI: Follow the [steps](https://rdf4j.org/documentation/tools/server-workbench/#add)
   2. Using RDF4 Server/Rest API: [API definition](https://rdf4j.org/documentation/reference/rest-api/#the-add-operation)
   3. BulkLoading(with docker): Execute the following command	
@@ -110,7 +110,7 @@ ERGS aims to offer a unifying graph platform to support a variety of use cases w
       ```
       Permissible `dataset format` are: 'rdf', 'turtle', 'ntriples', 'n3'.
   
-      It uses [docker/bulkloading/bulkload.properties](https://github.ibm.com/ReasoningInfra/expressive-reasoning-graph-store/blob/master/docker/bulkloading/bulkload.properties) for ingestion.The configuration file contains following configuration parameters:
+      It uses [docker/bulkloading/bulkload.properties](https://github.com/IBM/expressive-reasoning-graph-store/blob/master/docker/bulkloading/bulkload.properties) for ingestion.The configuration file contains following configuration parameters:
       1. input.enableforwardchaining (true/false): enable forward chaining (optional, default is false)
       2. input.commitfrequency: RDF triples commite size (required, default value is 10000 triples)
       3. input.numthreads: degree of parallalism (required, default value is 1 thread)
@@ -121,8 +121,6 @@ ERGS aims to offer a unifying graph platform to support a variety of use cases w
       <!---8. input.buildallpropindex (true/false): create combined index on all properties (optional, default is false)--->
  **Note: We strongly recommend of using Bulkloading for ingesting large data.**     
  ### Querying ERGS Repository 
-  [Sample](https://github.ibm.com/ReasoningInfra/Reasoning-Infrastructure/blob/janusgraph_rdf4j_docker/RDF4J/rdf4j-repository/src/test/resources/queries.txt)
+  [Sample](https://github.com/IBM/Reasoning-Infrastructure/blob/janusgraph_rdf4j_docker/RDF4J/rdf4j-repository/src/test/resources/queries.txt)
   1. Using RDF4J Workbench/GUI: Follow the [steps](https://rdf4j.org/documentation/tools/server-workbench/#querying-a-repository)
   2. Using RDF4 Server/Rest API: [API definition](https://rdf4j.org/documentation/reference/rest-api/#repository-queries)
-
-  
