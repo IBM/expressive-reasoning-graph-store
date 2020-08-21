@@ -6,7 +6,7 @@ To contribute code or documentation, please submit a **FIXME** [pull request](ht
 
 A good way to familiarize yourself with the codebase and contribution process is
 to look for and tackle low-hanging fruit in the **FIXME** [issue tracker](https://github.com/IBM/expressive-reasoning-graph-store/issues).
-Before embarking on a more ambitious contribution, please quickly [get in touch](#communication) with us.
+Before embarking on a more ambitious contribution, please quickly [get in touch](https://github.com/IBM/expressive-reasoning-graph-store/blob/master/MAINTAINERS.md) with us.
 
 **Note: We appreciate your effort, and want to avoid a situation where a contribution
 requires extensive rework (by you or by us), sits in backlog for a long time, or
