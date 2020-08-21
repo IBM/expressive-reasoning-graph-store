@@ -1,0 +1,18 @@
+#
+# Sesame configuration template for a ERGS repository
+#
+
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix rep: <http://www.openrdf.org/config/repository#>.
+@prefix ergs: <http://com.ibm.research.ergs#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+
+
+[] a rep:Repository ;
+   rep:repositoryID "{%Repository ID|myRepository%}" ;
+   rdfs:label "{%Repository title|Expressive Reasoning Graph Store%}" ;
+	rep:repositoryImpl [
+	rep:repositoryType "ergs:ExpressiveReasoningGraphStoreRepository" ;
+	ergs:tbox "{%tbox%}" ;
+	ergs:config "{%config%}" ;
+   ].

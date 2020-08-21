@@ -1,0 +1,42 @@
+version: '3'
+services:
+  janusgraph-docker:
+    image: janusgraph/janusgraph:0.4.0
+    container_name: ergo_janusgraph
+    user: root
+    volumes:
+      - "./docker/janusgraph/:/etc/opt/janusgraph/:ro"
+      - "./docker/data/index:/opt/janusgraph/index"
+    ports:
+      - "8182:8182"
+    depends_on:
+     - cass-docker
+    links:
+     - cass-docker
+  cass-docker:
+    image: cassandra:2.2.16
+    container_name: ergo_cass
+    user: root
+    environment:
+     - CASSANDRA_START_RPC=true
+    volumes:
+      - "./docker/data/cass:/var/lib/cassandra"
+  ergo-docker:
+    image: rdf4j:ergo
+    container_name: ergo_rdf4j
+    user: root
+    build:
+      context: .
+      dockerfile: docker/rdf4j/Dockerfile
+    ports: 
+      - "8080:8080"
+    volumes:
+      - "./docker/data/rdf4j:/root/.RDF4J/"
+      - "./docker/bulkloading/data:/usr/local/tomcat/bulkloading/data"
+      - "./docker/bulkloading/bulkload.properties:/usr/local/tomcat/bulkload.properties"
+    depends_on:
+     - cass-docker
+     - janusgraph-docker
+    links:
+     - cass-docker
+     - janusgraph-docker

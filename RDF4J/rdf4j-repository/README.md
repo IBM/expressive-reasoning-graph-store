@@ -1,0 +1,1 @@
+It exposes Expressive Reasoning Graph Store(ERGS) as RDFJ [Repository](https://rdf4j.org/javadoc/latest/org/eclipse/rdf4j/repository/Repository.html). This repository can be used for performing query and ingestion operations on ERGS using RDF4J standard Java APIs. 

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.ibm.research.reasoning</groupId>
+	<artifactId>ergs</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<properties>
+		<project-version>0.0.1-SNAPSHOT</project-version>
+		<netty4.version>4.1.25.Final</netty4.version>
+		<janusgraph.version>0.4.0</janusgraph.version>
+		<jena.version>3.6.0</jena.version>
+		<slf4j.version>1.7.10</slf4j.version>
+		<rdf4j.version>3.3.0</rdf4j.version>
+		<junit.version>4.13</junit.version>
+		<jfact.version>5.0.3</jfact.version>
+		<owlapi.version>5.0.3</owlapi.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<modules>
+		<module>IngestionPipeline</module>
+		<module>QueryEngine</module>
+		<module>RDF4J</module>
+	</modules>
+</project>

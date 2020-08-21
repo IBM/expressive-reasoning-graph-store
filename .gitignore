@@ -1,0 +1,36 @@
+# Java related
+target/**
+*/target/
+*.jar
+*.war
+*.ear
+*.class
+
+# eclipse specific
+*.pydevproject
+.project
+**/.project
+.settings/
+**/.settings
+bin
+**/bin
+.classpath
+**/.classpath
+.metadata
+tmp/**
+tmp/**/*
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+
+.loadpath
+
+# External tool builders
+.externalToolBuilders/
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+*.DS_Store
