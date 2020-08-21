@@ -2,10 +2,10 @@
 Our project welcomes external contributions. If you have an itch, please feel
 free to scratch it.
 
-To contribute code or documentation, please submit a **FIXME** [pull request](https://github.ibm.com/ReasoningInfra/expressive-reasoning-graph-store/pulls).
+To contribute code or documentation, please submit a **FIXME** [pull request](https://github.com/IBM/expressive-reasoning-graph-store/pulls).
 
 A good way to familiarize yourself with the codebase and contribution process is
-to look for and tackle low-hanging fruit in the **FIXME** [issue tracker](https://github.ibm.com/ReasoningInfra/expressive-reasoning-graph-store/issues).
+to look for and tackle low-hanging fruit in the **FIXME** [issue tracker](https://github.com/IBM/expressive-reasoning-graph-store/issues).
 Before embarking on a more ambitious contribution, please quickly [get in touch](#communication) with us.
 
 **Note: We appreciate your effort, and want to avoid a situation where a contribution
@@ -14,14 +14,14 @@ cannot be accepted at all!**
 
 ### Proposing new features
 
-If you would like to implement a new feature, please **FIXME** [raise an issue](https://github.ibm.com/ReasoningInfra/expressive-reasoning-graph-store/issues)
+If you would like to implement a new feature, please **FIXME** [raise an issue](https://github.com/IBM/expressive-reasoning-graph-store/issues)
 before sending a pull request so the feature can be discussed. This is to avoid
 you wasting your valuable time working on a feature that the project developers
 are not interested in accepting into the code base.
 
 ### Fixing bugs
 
-If you would like to fix a bug, please **FIXME** [raise an issue](https://github.ibm.com/ReasoningInfra/expressive-reasoning-graph-store/issues) before sending a
+If you would like to fix a bug, please **FIXME** [raise an issue](https://github.com/IBM/expressive-reasoning-graph-store/issues) before sending a
 pull request so it can be tracked.
 
 ### Merge approval
@@ -48,7 +48,7 @@ SPDX-License-Identifier: Apache-2.0
 
 We have tried to make it as easy as possible to make contributions. This
 applies to how we handle the legal aspects of contribution. We use the
-same approach - the [Developer's Certificate of Origin 1.1 (DCO)](https://github.ibm.com/ReasoningInfra/expressive-reasoning-graph-store/blob/master/DCO1.1.txt) - that the Linux® Kernel [community](https://elinux.org/Developer_Certificate_Of_Origin)
+same approach - the [Developer's Certificate of Origin 1.1 (DCO)](https://github.com/IBM/expressive-reasoning-graph-store/blob/master/DCO1.1.txt) - that the Linux® Kernel [community](https://elinux.org/Developer_Certificate_Of_Origin)
 uses to manage code contributions.
 
 We simply ask that when submitting a patch for review, the developer
