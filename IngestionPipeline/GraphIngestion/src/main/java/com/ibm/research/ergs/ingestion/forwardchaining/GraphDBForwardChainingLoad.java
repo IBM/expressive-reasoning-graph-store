@@ -501,38 +501,41 @@ public class GraphDBForwardChainingLoad extends GraphDBBaseOperations implements
 
       for (Literal propLiteral : propLiteralList) {
         String propVal = propLiteral.getLabel();
-
-        if (datatype.equalsIgnoreCase("string")) {
-          addProperty(vertex, graphPropKey, propVal);
-        } else if (datatype.equalsIgnoreCase("integer")
-            || datatype.equalsIgnoreCase("negativeInteger")
-            || datatype.equalsIgnoreCase("nonNegativeInteger")
-            || datatype.equalsIgnoreCase("nonPositiveInteger")
-            || datatype.equalsIgnoreCase("positiveInteger")) {
-          addProperty(vertex, graphPropKey, Integer.parseInt(propVal));
-        } else if (datatype.equalsIgnoreCase("decimal") || datatype.equalsIgnoreCase("float")) {
-          addProperty(vertex, graphPropKey, Float.parseFloat(propVal));
-        } else if (datatype.equalsIgnoreCase("double")) {
-          addProperty(vertex, graphPropKey, Double.parseDouble(propVal));
-        } else if (datatype.equalsIgnoreCase("boolean")) {
-          addProperty(vertex, graphPropKey, Boolean.parseBoolean(propVal));
-        } else if (datatype.equalsIgnoreCase("date")) {
-          Date date = getDate_yyyyMMdd(propVal);
-          if (date != null) {
-            addProperty(vertex, graphPropKey, date);
+        try {
+          if (datatype.equalsIgnoreCase("string")) {
+            addProperty(vertex, graphPropKey, propVal);
+          } else if (datatype.equalsIgnoreCase("integer")
+              || datatype.equalsIgnoreCase("negativeInteger")
+              || datatype.equalsIgnoreCase("nonNegativeInteger")
+              || datatype.equalsIgnoreCase("nonPositiveInteger")
+              || datatype.equalsIgnoreCase("positiveInteger")) {
+            addProperty(vertex, graphPropKey, Integer.parseInt(propVal));
+          } else if (datatype.equalsIgnoreCase("decimal") || datatype.equalsIgnoreCase("float")) {
+            addProperty(vertex, graphPropKey, Float.parseFloat(propVal));
+          } else if (datatype.equalsIgnoreCase("double")) {
+            addProperty(vertex, graphPropKey, Double.parseDouble(propVal));
+          } else if (datatype.equalsIgnoreCase("boolean")) {
+            addProperty(vertex, graphPropKey, Boolean.parseBoolean(propVal));
+          } else if (datatype.equalsIgnoreCase("date")) {
+            Date date = getDate_yyyyMMdd(propVal);
+            if (date != null) {
+              addProperty(vertex, graphPropKey, date);
+            }
+          } else if (datatype.equalsIgnoreCase("gYear")) {
+            Date date = getDate_yyyy(propVal);
+            if (date != null) {
+              addProperty(vertex, graphPropKey, date);
+            }
+          } else if (datatype.equalsIgnoreCase("gYearMonth")) {
+            Date date = getDate_yyyyMM(propVal);
+            if (date != null) {
+              addProperty(vertex, graphPropKey, date);
+            }
+          } else {
+            addProperty(vertex, graphPropKey, propVal);
           }
-        } else if (datatype.equalsIgnoreCase("gYear")) {
-          Date date = getDate_yyyy(propVal);
-          if (date != null) {
-            addProperty(vertex, graphPropKey, date);
-          }
-        } else if (datatype.equalsIgnoreCase("gYearMonth")) {
-          Date date = getDate_yyyyMM(propVal);
-          if (date != null) {
-            addProperty(vertex, graphPropKey, date);
-          }
-        } else {
-          addProperty(vertex, graphPropKey, propVal);
+        } catch (Exception e) {
+          logger.error("Exception: " + e);
         }
 
         // Storing language and datatype as meta property.
@@ -540,10 +543,11 @@ public class GraphDBForwardChainingLoad extends GraphDBBaseOperations implements
         if (language.isPresent()) {
           g.V(vertex).properties(graphPropKey).property("language", language.get()).next();
         }
-        g.V(vertex).properties(graphPropKey).property("datatype", propLiteral.getDatatype()).next();
-
+        g.V(vertex).properties(graphPropKey)
+            .property("datatype", propLiteral.getDatatype().toString()).next();
 
         addSuperClassDataProperty(vertex, propertyKey, propVal, datatype);
+
       }
     }
   }
