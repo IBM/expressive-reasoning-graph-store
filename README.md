@@ -4,7 +4,7 @@ The Expressive Reasoning Graph Store (ERGS) is an OWL reasoner and an RDF triple
 The key components and functionality of ERGS include:
 
 - RDF to Property Graph conversion: allows storing RDF/OWL datasets in a TinkerPop compliant graph store
-- SPARQL to Gremlin converter: allows running SPARQL queries over data stored in a TinkerPop complian graph store
+- SPARQL to Gremlin converter: allows running SPARQL queries over data stored in a TinkerPop compliant graph store
 - Reasoner: currently, ERGS supports RDFS reasoning and few OWL constructs, with additional constructs coming soon
 
 ERGS aims to offer a unifying graph platform to support a variety of use cases with special focus on:
@@ -24,10 +24,10 @@ ERGS aims to offer a unifying graph platform to support a variety of use cases w
   
   #### Prerequisites
    1. Docker: Download and Install Docker from https://www.docker.com
-   2. Reasoning-Infrastructure Project: Download the project
+   2. expressive-reasoning-graph-store Project: Download the project
    
   #### Steps to Deploy Web Application  
-   1. In the project Reasoning-Infrastructure execute the following command for first time build:
+   1. In the project expressive-reasoning-graph-store execute the following command for first time build:
       ```
       docker-compose up -d --build
       ```
@@ -124,3 +124,11 @@ ERGS aims to offer a unifying graph platform to support a variety of use cases w
   [Sample](https://github.com/IBM/expressive-reasoning-graph-store/blob/master/RDF4J/rdf4j-repository/src/test/resources/lubm/queries.txt)
   1. Using RDF4J Workbench/GUI: Follow the [steps](https://rdf4j.org/documentation/tools/server-workbench/#querying-a-repository)
   2. Using RDF4 Server/Rest API: [API definition](https://rdf4j.org/documentation/reference/rest-api/#repository-queries)
+  
+  ## References
+  1. [JanusGraph](https://janusgraph.org)
+  2. [RDF4J](https://rdf4j.org)
+  3. [Apache Jena](https://jena.apache.org)
+  4. [OWL API](http://owlcs.github.io/owlapi)
+  5. [JFact](http://jfact.sourceforge.net)
+  6. [Quetzal](https://github.com/Quetzal-RDF/quetzal)
