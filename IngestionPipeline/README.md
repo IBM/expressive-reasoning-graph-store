@@ -3,8 +3,8 @@ Ingestion Module is responsible for storing RDF data into property graph format.
 #### Schema Translation and loading:
 Schema translation is responsible for transforming input triple data into the property graph model. It builds schema of property graph which decides nodes structure, edges and their properties and translates triple appropriately to node property or edge during loading.
 
-#### Meta Graph for Supporting Query Translation: 
-For supporting execution of SPARQL queries on property graph, meta-graph is stored which provides schema translation related information to Query Translation module
+#### Metadata for Supporting Query Translation: 
+For supporting execution of SPARQL queries on property graph, metadata is stored as sub-graph which provides schema translation related information to Query Translation module
 
 #### Parallel Ingestion and Index Utilization: 
 For making loading process faster we have developed parallel approach by dividing loading task across threads.
