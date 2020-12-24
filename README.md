@@ -65,7 +65,7 @@ ERGS aims to offer a unifying graph platform to support a variety of use cases w
       * Replace graphs section in `<path of JanusGraph directory>/conf/gremlin-server/gremlin-server-configuration.yaml` with following
         ```
         graphs: {
-           ConfigurationManagementGraph: <Path of Reasoning-Infrastructure project>/RDF4J/rdf4j-repository/conf/janusgraph-hbase-configurationgraph.properties
+           ConfigurationManagementGraph: <Path of expressive-reasoning-graph-store project>/RDF4J/rdf4j-repository/src/main/resources/janusgraph-hbase-configurationgraph.properties
         }
         ```
       * Start JanusGraph server by issuing the following command from the JanusGraph directory
@@ -74,14 +74,17 @@ ERGS aims to offer a unifying graph platform to support a variety of use cases w
        * Download and extract tomcat from https://tomcat.apache.org/download-70.cgi.
   #### Steps to Deploy Web Application
    1. Download this project.
-   2. Execute the following command
+   2. Update the following properties in [system.properties](https://github.com/IBM/expressive-reasoning-graph-store/blob/master/RDF4J/rdf4j-repository/src/main/resources/system.properties) file:
+      1. storage.backend=hbase
+      2. storage.hostname=localhost
+      3. server.hostname=localhost
+   3. Execute the following command
       ```
       mvn install -Dmaven.test.skip=true
-      mvn package
       mv RDF4J/rdf4j-workbench/target/rdf4j-workbench-0.0.1-SNAPSHOT.war <path to tomcat server>/webapps/rdf4j-workbench.war
       mv RDF4J/rdf4j-server/target/rdf4j-server-0.0.1-SNAPSHOT.war <path to tomcat server>/webapps/rdf4j-server.war
       ```
-   3. Execute the following command to start the tomcat server
+   4. Execute the following command to start the tomcat server
       ```
       ./<path to tomcat server>/bin/startup.sh
       ```
