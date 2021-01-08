@@ -6,7 +6,7 @@ services:
     user: root
     volumes:
       - "./docker/janusgraph/:/etc/opt/janusgraph/:ro"
-      - "./docker/data/index:/opt/janusgraph/index"
+      - "./docker/data/index:/var/lib/janusgraph/index"
     ports:
       - "8182:8182"
     depends_on:
@@ -28,7 +28,7 @@ services:
     build:
       context: .
       dockerfile: docker/rdf4j/Dockerfile
-    ports: 
+    ports:
       - "8080:8080"
     volumes:
       - "./docker/data/rdf4j:/root/.RDF4J/"
