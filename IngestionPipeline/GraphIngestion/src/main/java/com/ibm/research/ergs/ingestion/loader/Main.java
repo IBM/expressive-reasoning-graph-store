@@ -88,6 +88,11 @@ public class Main {
       cluster.close();
     } else {
       String tboxFile = "src/test/resources/univ-bench.owl";
+      String janusGraphPropFile = "src/test/resources/janusgraph-hbase.properties";
+      String dataDir = "src/test/resources/lubm1u";
+      RDFFormat rdfFormat = RDFFormat.RDFXML;
+      String baseURI = "http://swat.cse.lehigh.edu/onto/univ-bench.owl";
+      
       InputStream i = null;
       try {
         i = new FileInputStream(tboxFile);
@@ -96,7 +101,7 @@ public class Main {
         System.exit(0);
       }
       JanusGraph janusGraph =
-          JanusGraphFactory.open("src/test/resources/janusgraph-hbase.properties");
+          JanusGraphFactory.open(janusGraphPropFile);
 
       startTime = System.nanoTime();
       CreateGraphFoundationSchema schemaCreator =
@@ -105,9 +110,7 @@ public class Main {
 
       loadRDFData = new LoadRDFData(janusGraph, properties);
 
-      File loadDirectory = new File("src/test/resources/lubm1u");
-      RDFFormat rdfFormat = RDFFormat.RDFXML;
-      String baseURI = "http://swat.cse.lehigh.edu/onto/univ-bench.owl";
+      File loadDirectory = new File(dataDir);
 
       loadRDFData.loadDirectoryAllFiles(loadDirectory, rdfFormat, baseURI);
       // loadRDFData.loadFromFile(new File("src/main/resources/univ-bench.owl"), rdfFormat,
