@@ -31,7 +31,7 @@ Experiments are performed on RHEL machine with 128 GB RAM, 16 cores and 1TB HDD.
     * properties_file: [docker/bulkloading/bulkload.properties](https://github.com/IBM/expressive-reasoning-graph-store/blob/master/docker/bulkloading/bulkload.properties) 
 
 
-4. After data loading use [ComputeTime.java](https://github.com/IBM/expressive-reasoning-graph-store/blob/master/RDF4J/rdf4j-repository/src/test/java/com/ibm/research/ergs/rdf4j/repository/ComputeTime.java) file to generate execution time for each query with following arguments.
+4. After data loading use [ComputeTime.java](https://github.com/IBM/expressive-reasoning-graph-store/blob/master/RDF4J/rdf4j-repository/src/test/java/com/ibm/research/ergs/rdf4j/repository/ComputeTime.java) file to generate execution time for each [query](https://github.com/IBM/expressive-reasoning-graph-store/blob/master/RDF4J/rdf4j-repository/src/test/resources/lubm/queries.txt) with following arguments.
     ```
      <repository_id> <query>
     ```
