@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Set;
 import org.apache.jena.graph.Node;
 import org.apache.jena.graph.Triple;
-import org.apache.jena.rdf.model.Literal;
+import org.apache.jena.graph.impl.LiteralLabel;
 import org.apache.jena.vocabulary.RDF;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -177,7 +177,7 @@ public class TriplesToRuleSystem {
         throw new RuntimeException(e);
       }
     } else if (n.isLiteral()) {
-      Literal l = (Literal) n.getLiteral();
+      LiteralLabel l = (LiteralLabel) n.getLiteral();
       return new ConstantExpr(l.getValue());
     } else {
       throw new RuntimeException("Unsuported node type in query : " + n);
