@@ -230,7 +230,7 @@ public class DeclarativeQueryProcessor {
   }
 
   /**
-   * Finds the {@link LeftJoin} from the subtree of given {@link Union} tupleExpr that can be
+   * Finds the {@link TupleExpr} from the subtree of given {@link Union} tupleExpr that can be
    * traversed using already visited variables
    *
    * @param tupleExpr expression tree
@@ -249,7 +249,7 @@ public class DeclarativeQueryProcessor {
   }
 
   /**
-   * Finds the {@link LeftJoin} from the subtree of given {@link Union} tupleExpr that can be
+   * Finds the {@link TupleExpr} from the subtree of given {@link Union} tupleExpr that can be
    * traversed using already visited variables
    *
    * @param tupleExpr expression tree
@@ -268,7 +268,7 @@ public class DeclarativeQueryProcessor {
   }
 
   /**
-   * Finds the {@link LeftJoin} from the subtree of given {@link StatementPattern} tupleExpr that
+   * Finds the {@link TupleExpr} from the subtree of given {@link StatementPattern} tupleExpr that
    * can be traversed using already visited variables
    *
    * @param tupleExpr expression tree
@@ -295,7 +295,7 @@ public class DeclarativeQueryProcessor {
   }
 
   /**
-   * Finds the {@link LeftJoin} from the subtree of given {@link ZeroLengthPath} tupleExpr that can
+   * Finds the {@link TupleExpr} from the subtree of given {@link ZeroLengthPath} tupleExpr that can
    * be traversed using already visited variables
    *
    * @param tupleExpr expression tree
@@ -313,7 +313,7 @@ public class DeclarativeQueryProcessor {
   }
 
   /**
-   * Finds the {@link LeftJoin} from the subtree of given {@link ArbitraryLengthPath} tupleExpr that
+   * Finds the {@link TupleExpr} from the subtree of given {@link ArbitraryLengthPath} tupleExpr that
    * can be traversed using already visited variables
    *
    * @param tupleExpr expression tree
@@ -321,8 +321,14 @@ public class DeclarativeQueryProcessor {
    * @return most optimal expression reachable using already visited variables along with its cost
    */
   private Map.Entry<TupleExpr, Long> getConnected(ArbitraryLengthPath tupleExpr, Set<Var> cur) {
-    return getConnected(tupleExpr.getPathExpression(), cur);
+	  Map.Entry<TupleExpr, Long> ret= getConnected(tupleExpr.getPathExpression(), cur);
+	  if(ret==null) {
+		  return ret;
+	  }else {
+		  return new AbstractMap.SimpleEntry<TupleExpr, Long>(tupleExpr, ret.getValue());
+	  }
   }
+  
 
   /**
    * Finds the most optimal {@link TupleExpr} that can be used to start a new traversal from the
@@ -382,7 +388,7 @@ public class DeclarativeQueryProcessor {
    * @return {@link TupleExpression} that can be used to start a new traversal along with its cost
    */
   private Map.Entry<TupleExpr, Long> getFirst(Filter tupleExpr) {
-    Long filterCost = metaData.getIndexedFilter(tupleExpr).stream().map(a -> a.getRank()).count();
+    Long filterCost = metaData.getIndexedFilter(tupleExpr).stream().map(a -> a.getRank()).reduce(0L, (a, b) -> a + b);
     return new AbstractMap.SimpleEntry<TupleExpr, Long>(tupleExpr, filterCost);
   }
 
@@ -394,7 +400,7 @@ public class DeclarativeQueryProcessor {
    * @return {@link TupleExpression} that can be used to start a new traversal along with its cost
    */
   private Map.Entry<TupleExpr, Long> getFirst(Extension tupleExpr) {
-    Long filterCost = metaData.getIndexedFilter(tupleExpr).stream().map(a -> a.getRank()).count();
+    Long filterCost = metaData.getIndexedFilter(tupleExpr).stream().map(a -> a.getRank()).reduce(0L, (a, b) -> a + b);
     return new AbstractMap.SimpleEntry<TupleExpr, Long>(tupleExpr, filterCost);
   }
 
@@ -487,7 +493,7 @@ public class DeclarativeQueryProcessor {
    * @return {@link TupleExpression} that can be used to start a new traversal along with its cost
    */
   private Map.Entry<TupleExpr, Long> getFirst(StatementPattern tupleExpr) {
-    Long filterCost = metaData.getIndexedFilter(tupleExpr).stream().map(a -> a.getRank()).count();
+    Long filterCost = metaData.getIndexedFilter(tupleExpr).stream().map(a -> a.getRank()).reduce(0L, (a, b) -> a + b);
     return new AbstractMap.SimpleEntry<TupleExpr, Long>(tupleExpr, filterCost);
   }
 
@@ -499,7 +505,7 @@ public class DeclarativeQueryProcessor {
    * @return {@link TupleExpression} that can be used to start a new traversal along with its cost
    */
   private Map.Entry<TupleExpr, Long> getFirst(ZeroLengthPath tupleExpr) {
-    Long filterCost = metaData.getIndexedFilter(tupleExpr).stream().map(a -> a.getRank()).count();
+    Long filterCost = metaData.getIndexedFilter(tupleExpr).stream().map(a -> a.getRank()).reduce(0L, (a, b) -> a + b);
     return new AbstractMap.SimpleEntry<TupleExpr, Long>(tupleExpr, filterCost);
   }
 
@@ -511,7 +517,13 @@ public class DeclarativeQueryProcessor {
    * @return {@link TupleExpression} that can be used to start a new traversal along with its cost
    */
   private Map.Entry<TupleExpr, Long> getFirst(ArbitraryLengthPath tupleExpr) {
-    return getFirst(tupleExpr.getPathExpression());
+	  Map.Entry<TupleExpr, Long> ret = getFirst(tupleExpr.getPathExpression());
+	  if (ret==null) {
+		  return ret;
+	  }else {
+		  return  new AbstractMap.SimpleEntry<TupleExpr, Long>(tupleExpr,ret.getValue());
+	  }
+	  
   }
 
   private Map.Entry<TupleExpr, Long> better(Map.Entry<TupleExpr, Long> first,
