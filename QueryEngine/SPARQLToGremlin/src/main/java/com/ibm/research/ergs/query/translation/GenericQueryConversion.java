@@ -29,7 +29,6 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import org.apache.tinkerpop.gremlin.process.traversal.P;
 import org.apache.tinkerpop.gremlin.process.traversal.Pop;
-import org.apache.tinkerpop.gremlin.process.traversal.TextP;
 import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
 import org.apache.tinkerpop.gremlin.process.traversal.Traverser;
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversal;
@@ -621,6 +620,24 @@ public class GenericQueryConversion {
     traversal = traversal.where(__.not(right));
   }
 
+
+  /**
+   * It collects all the triples present in BGP into a list and other operators into separate list
+   *
+   * @param tupleExpr subtree of the parse tree corresponding to the actual
+   *
+   * @param triples {@link@ List} containing the plain triples
+   * @param nonTriples {@link@ List} containing the complex operators
+   */
+  public void processUnion(TupleExpr tupleExpr, ArrayList<TupleExpr> triples) {
+    if (tupleExpr instanceof Union) {
+      processUnion(((Union) tupleExpr).getLeftArg(), triples);
+      processUnion(((Union) tupleExpr).getRightArg(), triples);
+    } else {
+      triples.add(tupleExpr);
+    }
+  }
+
   /**
    * This method converts the parse tree with {@link Union} operator at the root
    *
@@ -632,17 +649,19 @@ public class GenericQueryConversion {
    * @param cur {@link Set} of variables already visited by current traversal
    */
   private void translate(Union tupleExpr, GraphTraversal<?, ?> traversal, Set<Var> cur) {
-    Traversal left = __.<Vertex>start();
-    Set<Var> leftCur = new HashSet<Var>(cur);
-    translate(tupleExpr.getLeftArg(), (GraphTraversal<?, ?>) left, leftCur);
-
-    Traversal right = __.<Vertex>start();
-    Set<Var> rightCur = new HashSet<Var>(cur);
-    translate(tupleExpr.getRightArg(), (GraphTraversal<?, ?>) right, rightCur);
-
-    cur.addAll(leftCur);
-    cur.addAll(rightCur);
-    traversal = traversal.union(left, right);
+    ArrayList<TupleExpr> triples = new ArrayList<TupleExpr>();
+    processUnion(tupleExpr, triples);
+    ArrayList<Traversal> unions = new ArrayList<Traversal>();
+    Set<Var> updatedCur = new HashSet<Var>();
+    for (TupleExpr triple : triples) {
+      Traversal tr = __.<Vertex>start();
+      Set<Var> newCur = new HashSet<Var>(cur);
+      translate(triple, (GraphTraversal<?, ?>) tr, newCur);
+      unions.add(tr);
+      updatedCur.addAll(newCur);
+    }
+    cur.addAll(updatedCur);
+    traversal = traversal.union(unions.toArray(new Traversal[0]));
   }
 
   /**
@@ -944,7 +963,7 @@ public class GenericQueryConversion {
       }
       String asVar = queryData.getAnonymousVariable(filter.getAsVar());
       tr = tr.as(asVar);
-      tr = tr.has("id", TextP.containing(":"));
+      // tr = tr.has("id", TextP.containing(":"));
       tr = tr.where(__.select(Pop.first, asVar).as(asVar));
       traversals.add(tr);
     }
