@@ -1,17 +1,15 @@
 /*******************************************************************************
  * Copyright 2020 IBM Corporation and others.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License. You may obtain a copy of the License at
  *
- * 	http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software distributed under the License
+ * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing permissions and limitations under
+ * the License.
  *******************************************************************************/
 package com.ibm.research.ergs.query.process;
 
@@ -313,22 +311,22 @@ public class DeclarativeQueryProcessor {
   }
 
   /**
-   * Finds the {@link TupleExpr} from the subtree of given {@link ArbitraryLengthPath} tupleExpr that
-   * can be traversed using already visited variables
+   * Finds the {@link TupleExpr} from the subtree of given {@link ArbitraryLengthPath} tupleExpr
+   * that can be traversed using already visited variables
    *
    * @param tupleExpr expression tree
    * @param cur {@link Set} of variables already visited by current traversal
    * @return most optimal expression reachable using already visited variables along with its cost
    */
   private Map.Entry<TupleExpr, Long> getConnected(ArbitraryLengthPath tupleExpr, Set<Var> cur) {
-	  Map.Entry<TupleExpr, Long> ret= getConnected(tupleExpr.getPathExpression(), cur);
-	  if(ret==null) {
-		  return ret;
-	  }else {
-		  return new AbstractMap.SimpleEntry<TupleExpr, Long>(tupleExpr, ret.getValue());
-	  }
+    Map.Entry<TupleExpr, Long> ret = getConnected(tupleExpr.getPathExpression(), cur);
+    if (ret == null) {
+      return ret;
+    } else {
+      return new AbstractMap.SimpleEntry<TupleExpr, Long>(tupleExpr, ret.getValue());
+    }
   }
-  
+
 
   /**
    * Finds the most optimal {@link TupleExpr} that can be used to start a new traversal from the
@@ -388,7 +386,8 @@ public class DeclarativeQueryProcessor {
    * @return {@link TupleExpression} that can be used to start a new traversal along with its cost
    */
   private Map.Entry<TupleExpr, Long> getFirst(Filter tupleExpr) {
-    Long filterCost = metaData.getIndexedFilter(tupleExpr).stream().map(a -> a.getRank()).reduce(0L, (a, b) -> a + b);
+    Long filterCost = metaData.getIndexedFilter(tupleExpr).stream().map(a -> a.getRank()).reduce(0L,
+        (a, b) -> a + b);
     return new AbstractMap.SimpleEntry<TupleExpr, Long>(tupleExpr, filterCost);
   }
 
@@ -400,7 +399,8 @@ public class DeclarativeQueryProcessor {
    * @return {@link TupleExpression} that can be used to start a new traversal along with its cost
    */
   private Map.Entry<TupleExpr, Long> getFirst(Extension tupleExpr) {
-    Long filterCost = metaData.getIndexedFilter(tupleExpr).stream().map(a -> a.getRank()).reduce(0L, (a, b) -> a + b);
+    Long filterCost = metaData.getIndexedFilter(tupleExpr).stream().map(a -> a.getRank()).reduce(0L,
+        (a, b) -> a + b);
     return new AbstractMap.SimpleEntry<TupleExpr, Long>(tupleExpr, filterCost);
   }
 
@@ -493,7 +493,8 @@ public class DeclarativeQueryProcessor {
    * @return {@link TupleExpression} that can be used to start a new traversal along with its cost
    */
   private Map.Entry<TupleExpr, Long> getFirst(StatementPattern tupleExpr) {
-    Long filterCost = metaData.getIndexedFilter(tupleExpr).stream().map(a -> a.getRank()).reduce(0L, (a, b) -> a + b);
+    Long filterCost = metaData.getIndexedFilter(tupleExpr).stream().map(a -> a.getRank()).reduce(0L,
+        (a, b) -> a + b);
     return new AbstractMap.SimpleEntry<TupleExpr, Long>(tupleExpr, filterCost);
   }
 
@@ -505,7 +506,8 @@ public class DeclarativeQueryProcessor {
    * @return {@link TupleExpression} that can be used to start a new traversal along with its cost
    */
   private Map.Entry<TupleExpr, Long> getFirst(ZeroLengthPath tupleExpr) {
-    Long filterCost = metaData.getIndexedFilter(tupleExpr).stream().map(a -> a.getRank()).reduce(0L, (a, b) -> a + b);
+    Long filterCost = metaData.getIndexedFilter(tupleExpr).stream().map(a -> a.getRank()).reduce(0L,
+        (a, b) -> a + b);
     return new AbstractMap.SimpleEntry<TupleExpr, Long>(tupleExpr, filterCost);
   }
 
@@ -517,13 +519,13 @@ public class DeclarativeQueryProcessor {
    * @return {@link TupleExpression} that can be used to start a new traversal along with its cost
    */
   private Map.Entry<TupleExpr, Long> getFirst(ArbitraryLengthPath tupleExpr) {
-	  Map.Entry<TupleExpr, Long> ret = getFirst(tupleExpr.getPathExpression());
-	  if (ret==null) {
-		  return ret;
-	  }else {
-		  return  new AbstractMap.SimpleEntry<TupleExpr, Long>(tupleExpr,ret.getValue());
-	  }
-	  
+    Map.Entry<TupleExpr, Long> ret = getFirst(tupleExpr.getPathExpression());
+    if (ret == null) {
+      return ret;
+    } else {
+      return new AbstractMap.SimpleEntry<TupleExpr, Long>(tupleExpr, ret.getValue());
+    }
+
   }
 
   private Map.Entry<TupleExpr, Long> better(Map.Entry<TupleExpr, Long> first,
