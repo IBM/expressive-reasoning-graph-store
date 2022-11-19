@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Reader;
 import java.io.StringWriter;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -128,7 +129,7 @@ public class OCUtils {
     List<OWLOntology> onts = createRandomAboxAxiomPartitions(ont, numberOfPartitions, seed);
     List<File> ret = new ArrayList<File>(onts.size());
     for (OWLOntology o : onts) {
-      File tempFile = File.createTempFile("ont", ".rdf");
+      File tempFile = Files.createTempFile("ont", ".rdf").toFile();
       saveRDFXML(o, tempFile);
       ret.add(tempFile);
       logger.debug("abox temp file: {}", tempFile.getAbsolutePath());
@@ -139,7 +140,7 @@ public class OCUtils {
 
   public static File createOWLThingTypeDeclForIndividualsAsFile(OWLOntology ont)
       throws OWLOntologyCreationException, IOException {
-    File tempFile = File.createTempFile("ont", ".ind.rdf");
+    File tempFile = Files.createTempFile("ont", ".ind.rdf").toFile();
     OWLOntology td = createOWLThingTypeDeclForIndividuals(ont);
     saveRDFXML(td, tempFile);
     logger.debug("owl thing type decl file: {}", tempFile.getAbsolutePath());
@@ -223,7 +224,7 @@ public class OCUtils {
   }
 
   public static OWLOntology load(Model tbox) throws IOException, OWLOntologyCreationException {
-    File tempFile = File.createTempFile("tboxmodel", ".ttl");
+    File tempFile = Files.createTempFile("tboxmodel", ".ttl").toFile();
     FileOutputStream out = new FileOutputStream(tempFile);
     tbox.write(out);
     out.flush();
